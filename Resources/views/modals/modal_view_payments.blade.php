@@ -1,7 +1,7 @@
-@modal_view(['modal_id' => 'payments_view_1', 'edit_route' => 'payments.edit', 'model_id' => '2'])
+@modal_view(['modal_id' => 'payments_view_'.$payment->id, 'edit_route' => 'payments.edit', 'model_id' => $payment])
 
 @slot('title')
-Pagamento #{{ '1' }}
+Pagamento #{{ $payment->id }}
 @endslot
 
 <div class="row justify-content-center mb-1">

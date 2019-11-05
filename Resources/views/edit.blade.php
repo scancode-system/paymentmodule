@@ -4,7 +4,7 @@
 
 <div class="card">
 	<div class="card-header">
-		<i class="fa fa-edit"></i> Pagamento #{{ '1' }}
+		<i class="fa fa-edit"></i> Pagamento #{{ $payment->id }}
 	</div>
 	<div class="card-body">
 		@alert_success()

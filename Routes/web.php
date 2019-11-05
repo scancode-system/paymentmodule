@@ -10,14 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::prefix('payment')->group(function() {
-    Route::get('/', 'PaymentController@index');
-});*/
-
-
-
-
 Route::prefix('payments')->middleware('auth')->group(function() {
 	Route::get('', 'PaymentController@index')->name('payments.index');
 	Route::get('create', 'PaymentController@create')->name('payments.create');
