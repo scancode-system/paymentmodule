@@ -28,6 +28,11 @@ class PaymentRepository
 	public static function destroy($payment){
 		$payment->delete();
 	}
- 
+
+
+	public static function toSelect($value, $description){
+		return Payment::pluck($description, $value);
+	}
+
 
 }
