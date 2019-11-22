@@ -5,7 +5,7 @@ namespace Modules\Payment\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class PaymentServiceProvider extends ServiceProvider
+class PaymentServiceProvider extends ServiceProvider 
 {
     /**
      * Boot the application events.
@@ -15,6 +15,7 @@ class PaymentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerViews();
+        $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
@@ -51,6 +52,18 @@ class PaymentServiceProvider extends ServiceProvider
         }, \Config::get('view.paths')), [$sourcePath]), 'payment');
     }
     
+
+        /**
+     * Register an additional directory of factories.
+     *
+     * @return void
+     */
+        public function registerFactories()
+        {
+            if (! app()->environment('production') && $this->app->runningInConsole()) {
+                app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            }
+        }
 
     /**
      * Get the services provided by the provider.
