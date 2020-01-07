@@ -1,0 +1,1 @@
+<a href="{{ route('payments.import') }}" class="list-group-item list-group-item-accent-danger list-group-item-divider list-group-item-action">Pagamentos</a>

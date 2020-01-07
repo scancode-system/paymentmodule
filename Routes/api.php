@@ -1,18 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
+Route::prefix('payments')->middleware('auth.basic.once')->group(function() {
+	
+	Route::get('all', 'Api\PaymentController@all');
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:api')->get('/payment', function (Request $request) {
-    return $request->user();
 });

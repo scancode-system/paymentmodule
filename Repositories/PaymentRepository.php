@@ -7,6 +7,16 @@ use Modules\Payment\Entities\Payment;
 class PaymentRepository
 {
 
+	// LOAD
+	public static function all()
+	{
+		return Payment::all();
+	}
+
+	public static function loadByUniqueKeys($id, $description)
+	{
+		return Payment::where('id', $id)->orWhere('description', $description)->first();
+	}
 
 	public static function list($search = '', $limit = 10){
 		$payments =  Payment::where('description', 'like', '%'.$search.'%')->paginate($limit);
@@ -16,12 +26,13 @@ class PaymentRepository
 
 
 	public static function store($values){
-		Payment::create($values);
+		return Payment::create($values);
 	}
 
 
 	public static function update(Payment $payment, $values){
 		$payment->update($values);
+		return $payment;
 	}
 
 

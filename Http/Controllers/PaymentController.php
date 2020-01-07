@@ -46,4 +46,9 @@ class PaymentController extends Controller
         return back()->with('success', 'Pagamento deletado.');
     }
 
+    public function import(Request $request)
+    {
+        return view('payment::import');
+    }
+
 }

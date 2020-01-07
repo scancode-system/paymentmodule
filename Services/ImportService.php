@@ -2,13 +2,14 @@
 
 namespace Modules\Payment\Services;
 
-use Illuminate\Support\Facades\Storage;
+use Modules\Payment\Imports\PaymentsImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportService {
 
-    public function import()
+    public function import($path)
     {
-
+    	Excel::import(new PaymentsImport, $path);
     }
 
 }
