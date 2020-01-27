@@ -50,6 +50,7 @@ class PaymentsImport implements OnEachRow, WithHeadingRow, WithEvents
 
 	public static function beforeImport(BeforeImport $event)
 	{
+		SessionService::title('Payment', 'import', 'Pagamentos'); 
 		$cells = $event->getDelegate()->getActiveSheet()->toArray();
 		$import = $event->getConcernable();
 		$import->data($cells);
