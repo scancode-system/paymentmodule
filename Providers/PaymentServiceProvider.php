@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace Modules\Payment\Providers;
 
@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Factory;
 
 class PaymentServiceProvider extends ServiceProvider 
 {
+    /**
+     * @var string $moduleName
+     */
+    protected $moduleName = 'Payment';
+
+    /**
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'payment';
     /**
      * Boot the application events.
      *
@@ -39,7 +48,17 @@ class PaymentServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/payment');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
+
+        $this->publishes([
+            $sourcePath => $viewPath
+        ], ['views', $this->moduleNameLower . '-module-views']);
+
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
+
+        /*$viewPath = resource_path('views/modules/payment');
 
         $sourcePath = __DIR__.'/../Resources/views';
 
@@ -49,7 +68,7 @@ class PaymentServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/payment';
-        }, \Config::get('view.paths')), [$sourcePath]), 'payment');
+        }, \Config::get('view.paths')), [$sourcePath]), 'payment');*/
     }
     
 
@@ -61,8 +80,12 @@ class PaymentServiceProvider extends ServiceProvider
         public function registerFactories()
         {
             if (! app()->environment('production') && $this->app->runningInConsole()) {
-                app(Factory::class)->load(__DIR__ . '/../Database/factories');
+                app(Factory::class)->load(module_path($this->moduleName, 'Database/factories'));
             }
+
+            /*if (! app()->environment('production') && $this->app->runningInConsole()) {
+                app(Factory::class)->load(__DIR__ . '/../Database/factories');
+            }*/
         }
 
     /**
@@ -73,5 +96,16 @@ class PaymentServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach (\Config::get('view.paths') as $path) {
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }

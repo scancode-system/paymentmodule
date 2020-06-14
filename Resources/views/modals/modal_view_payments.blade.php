@@ -1,4 +1,4 @@
-@modal_view(['modal_id' => 'payments_view_'.$payment->id, 'edit_route' => 'payments.edit', 'model_id' => $payment])
+<x-modal_view :modal-id="'payments_view_'.$payment->id" edit-route="payments.edit" :model_id="$payment">
 
 @slot('title')
 Pagamento #{{ $payment->id }}
@@ -22,3 +22,5 @@ Pagamento #{{ $payment->id }}
 </div>
 
 @endmodal_view
+
+</x-modal_view>
