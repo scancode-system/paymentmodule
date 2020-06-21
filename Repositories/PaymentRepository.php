@@ -13,6 +13,11 @@ class PaymentRepository
 		return Payment::all();
 	}
 
+	public static function loadVisibles()
+	{
+		return Payment::where('visible', true)->get();
+	}
+
 	public static function loadByUniqueKeys($id, $description)
 	{
 		return Payment::where('id', $id)->orWhere('description', $description)->first();
@@ -25,17 +30,20 @@ class PaymentRepository
 	}
 
 
+	// CREATE
 	public static function store($values){
 		return Payment::create($values);
 	}
 
 
+	// UPDATE
 	public static function update(Payment $payment, $values){
 		$payment->update($values);
 		return $payment;
 	}
 
 
+	// DESTROY
 	public static function destroy($payment){
 		$payment->delete();
 	}
