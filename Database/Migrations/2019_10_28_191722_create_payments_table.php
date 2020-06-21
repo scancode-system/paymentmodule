@@ -20,6 +20,7 @@ class CreatePaymentsTable extends Migration
             $table->decimal('min_value', 10, 2)->default(0);
             $table->decimal('discount', 5, 2)->default(0);
             $table->decimal('addition', 5, 2)->default(0);
+            $table->boolean('visible')->default(true);
 
             $table->timestamps();
         });

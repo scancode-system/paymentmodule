@@ -21,6 +21,21 @@
 	{{ Form::label('addition', 'Acréscimo') }}
 	{{ Form::number('addition', old('addition'), ['class' => 'form-control', 'step' => '0.01']) }}
 </div>
+
+
+<div class="form-group row">
+	{{ Form::label('visible', 'Visível', ['class' => 'col-sm-5 col-form-label']) }}
+	<div class="col-sm-7">
+		<label class="switch switch-primary switch-lg mb-0 ml-3">
+			{{ Form::hidden('visible', 0) }}
+			{{ Form::checkbox('visible', 1, null,['class' => 'switch-input']) }}
+			<span class="switch-slider"></span>
+		</label>
+	</div>
+</div>	
+
+
+
 <div class="form-group  mb-0">
 	{{ Form::button('<i class="fa fa-save"></i><span>Salvar</span>', ['class' => 'btn btn-brand btn-primary', 'type' => 'submit']) }}
 </div>
