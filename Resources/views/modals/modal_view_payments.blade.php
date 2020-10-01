@@ -21,6 +21,5 @@ Pagamento #{{ $payment->id }}
 	<div class="col-md-5">@percentage($payment->addition)</div>
 </div>
 
-@endmodal_view
 
 </x-modal_view>
